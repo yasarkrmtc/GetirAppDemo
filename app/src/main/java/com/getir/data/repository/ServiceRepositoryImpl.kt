@@ -9,7 +9,7 @@ class ServiceRepositoryImpl @Inject constructor(
     private val serviceInterface: ServiceInterface
 ) : ServiceRepository {
 
-    override suspend fun getFoods(): Single<DemoResponse> {
+    override suspend fun getProducts(): Single<List<DemoResponse>> {
         return serviceInterface.fetchProduct()
     }
 }

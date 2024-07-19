@@ -4,6 +4,6 @@ import com.getir.data.api.DemoResponse
 import io.reactivex.rxjava3.core.Single
 
 interface ServiceRepository {
-    suspend fun getFoods(): Single<DemoResponse>
+    suspend fun getProducts(): Single<List<DemoResponse>>
 
 }

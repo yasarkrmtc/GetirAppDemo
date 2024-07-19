@@ -90,5 +90,13 @@ dependencies {
     implementation ("io.reactivex.rxjava3:rxjava:3.1.6")
     implementation ("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
 
+    //Room
+    implementation ("androidx.room:room-runtime:2.5.0")
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+    kapt ("androidx.room:room-compiler:2.5.0")
+    implementation ("androidx.room:room-ktx:2.5.0")
+    implementation ("androidx.room:room-rxjava2:2.5.0")
+    implementation ("androidx.room:room-rxjava3:2.5.0")
+
 }
 

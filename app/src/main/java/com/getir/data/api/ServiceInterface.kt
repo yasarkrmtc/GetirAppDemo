@@ -1,11 +1,12 @@
 package com.getir.data.api
 
 import io.reactivex.rxjava3.core.Single
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ServiceInterface {
 
-    @POST("api/products")
+    @GET("api/products")
     fun fetchProduct(
-    ): Single<DemoResponse>
+    ): Single<List<DemoResponse>>
 }

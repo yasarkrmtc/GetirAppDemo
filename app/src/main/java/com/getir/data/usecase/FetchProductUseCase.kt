@@ -8,6 +8,6 @@ import javax.inject.Inject
 class FetchProductUseCase @Inject constructor(
     private val repositoryImpl: ServiceRepositoryImpl
 ) {
-    suspend operator fun invoke() : Single<DemoResponse> = repositoryImpl.getFoods()
+    suspend operator fun invoke() : Single<List<DemoResponse>> = repositoryImpl.getProducts()
 
 }

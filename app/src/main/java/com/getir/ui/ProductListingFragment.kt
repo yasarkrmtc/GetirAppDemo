@@ -21,4 +21,6 @@ class ProductListingFragment :
             viewModel.getProduct()
         }
     }
+
+
 }

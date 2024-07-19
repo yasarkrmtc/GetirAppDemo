@@ -1,6 +1,5 @@
 package com.getir.data.api
 
-import com.getir.model.Product
 import com.google.gson.annotations.SerializedName
 
 data class DemoResponse(
