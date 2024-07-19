@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.view.View
 import com.getir.BaseFragment
 import com.getir.databinding.FragmentProductDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProductDetailFragment :
     BaseFragment<FragmentProductDetailBinding>(FragmentProductDetailBinding::inflate) {
 
