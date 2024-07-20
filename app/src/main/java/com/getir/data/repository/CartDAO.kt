@@ -11,4 +11,27 @@ import kotlinx.coroutines.flow.Flow
 interface CartDAO {
 
 
+    @Query("SELECT * FROM items")
+    fun getAllItems(): Flow<List<ItemEntity>>
+
+    @Query("SELECT * FROM items WHERE id = :itemId")
+    suspend fun getItemById(itemId: String): ItemEntity?
+
+    @Update
+    suspend fun update(item: ItemEntity)
+
+    @Insert
+    suspend fun insert(item : ItemEntity)
+
+    @Delete
+    suspend fun delete(item: ItemEntity)
+
+    @Query("DELETE FROM items")
+    suspend fun deleteAll()
+
+    @Query("SELECT SUM(totalOrder) FROM items")
+    fun getTotalCount() : Flow<Int?>
+
+    @Query("SELECT SUM(totalOrder*price) FROM items")
+    fun getTotalPrice() : Flow<Double?>
 }

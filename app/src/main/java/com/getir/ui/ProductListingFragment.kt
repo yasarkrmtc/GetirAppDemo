@@ -36,6 +36,12 @@ class ProductListingFragment :
             viewModel.getProduct()
             viewModel.getSuggestedProduct()
         }
+        initListener()
+    }
+    private fun initListener(){
+        verticalAdapter.onItemClick {
+            viewModel.updateDataBase(it)
+        }
     }
 
     private fun observeData() {
@@ -66,13 +72,13 @@ class ProductListingFragment :
     }
 
     private fun setupVerticalRecyclerView() {
-        binding.recyclerViewVertical.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerViewVertical.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerViewVertical.adapter = verticalAdapter
 
         // Apply custom item decoration
         val itemDecoration = CustomAdaptiveDecoration(
             context = requireContext(),
-            spanCount = 2,
+            spanCount = 3,
             spacingHorizontal = 16,
             spacingVertical = 16
         )

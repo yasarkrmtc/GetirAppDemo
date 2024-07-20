@@ -2,6 +2,7 @@ package com.getir.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,6 +13,13 @@ import com.getir.databinding.ProductListingCardItemBinding
 
 class ProductListingAdapter :
     ListAdapter<Product, ProductListingAdapter.ProductViewHolder>(ProductDiffCallback()) {
+
+    private var onItemClick: (item: Product) -> Unit =
+        { item -> }
+
+    fun onItemClick(item: (Product) -> Unit) {
+        onItemClick = item
+    }
 
     inner class ProductViewHolder(private val binding: ProductListingCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -24,7 +32,14 @@ class ProductListingAdapter :
 
             // Set click listener for add button
             binding.addButton.setOnClickListener {
-                // Handle add button click
+                product.totalOrder += 1
+                binding.stoke.text = product.totalOrder.toString()
+                onItemClick.invoke(product)
+            }
+            binding.minusButton.setOnClickListener {
+                product.totalOrder -= 1
+                binding.stoke.text = product.totalOrder.toString()
+                onItemClick.invoke(product)
             }
         }
     }

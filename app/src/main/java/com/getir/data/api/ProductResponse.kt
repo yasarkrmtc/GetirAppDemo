@@ -17,7 +17,8 @@ data class Product(
     @SerializedName("imageURL") val imageURL: String?,
     @SerializedName("price") val price: Double?,
     @SerializedName("priceText") val priceText: String?,
-    @SerializedName("shortDescription") val shortDescription: String?
+    @SerializedName("shortDescription") val shortDescription: String?,
+    var totalOrder:Int=0,
 )
 
 data class SuggestedProduct(
@@ -30,7 +31,8 @@ data class SuggestedProduct(
     @SerializedName("shortDescription") val shortDescription: String?,
     @SerializedName("category") val category: String?,
     @SerializedName("unitPrice") val unitPrice: Double?,
-    @SerializedName("status") val status: Int?
+    @SerializedName("status") val status: Int?,
+    var totalOrder:Int=0,
 )
 
 data class SuggestedProductResponse(

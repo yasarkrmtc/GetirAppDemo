@@ -2,8 +2,10 @@ package com.getir.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.getir.data.api.Product
 import com.getir.data.usecase.FetchProductUseCase
 import com.getir.data.usecase.FetchSuggestedProductUseCase
+import com.getir.data.usecase.InsertDataBaseUseCase
 import com.getir.model.ResponseStatus
 import com.getir.ui.ProductListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductListingViewModel @Inject constructor(
     private val fetchProductUseCase: FetchProductUseCase,
-    private val fetchSuggestedProductUseCase: FetchSuggestedProductUseCase
+    private val fetchSuggestedProductUseCase: FetchSuggestedProductUseCase,
+    private val insertDataBaseUseCase: InsertDataBaseUseCase
 ) :
     ViewModel() {
 
@@ -88,5 +91,10 @@ class ProductListingViewModel @Inject constructor(
                 }
         }
 
+    }
+    fun updateDataBase(item: Product) {
+        viewModelScope.launch {
+            insertDataBaseUseCase(item)
+        }
     }
 }

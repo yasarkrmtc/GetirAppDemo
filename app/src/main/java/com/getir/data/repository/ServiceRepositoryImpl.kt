@@ -1,5 +1,6 @@
 package com.getir.data.repository
 
+import com.getir.data.api.Product
 import com.getir.data.api.ProductResponse
 import com.getir.data.api.ServiceInterface
 import com.getir.data.api.SuggestedProductResponse
@@ -12,7 +13,8 @@ import retrofit2.Callback
 import javax.inject.Inject
 
 class ServiceRepositoryImpl @Inject constructor(
-    private val serviceInterface: ServiceInterface
+    private val serviceInterface: ServiceInterface,
+    private val cartDAO: CartDAO
 ) : ServiceRepository {
 
     override suspend fun getProducts(): Flow<Response<List<ProductResponse>>> {
@@ -67,5 +69,45 @@ class ServiceRepositoryImpl @Inject constructor(
             })
             awaitClose()
         }
+    }
+
+    override suspend fun insertDataBaseItem(item: Product) {
+        if (item.totalOrder == 0) {
+            cartDAO.delete(
+                ItemEntity(
+                    id = item.id,
+                    name = item.name,
+                    attribute = item.attribute,
+                    thumbnailURL = item.thumbnailURL,
+                    imageURL = item.imageURL,
+                    price = item.price,
+                    priceText = item.priceText,
+                    shortDescription = item.shortDescription,
+                    totalOrder = 1
+                )
+            )
+
+        } else {
+            val existingItem = cartDAO.getItemById(item.id)
+            if (existingItem != null) {
+                existingItem.totalOrder = item.totalOrder
+                cartDAO.update(existingItem)
+            } else {
+                cartDAO.insert(
+                    ItemEntity(
+                        id = item.id,
+                        name = item.name,
+                        attribute = item.attribute,
+                        thumbnailURL = item.thumbnailURL,
+                        imageURL = item.imageURL,
+                        price = item.price,
+                        priceText = item.priceText,
+                        shortDescription = item.shortDescription,
+                        totalOrder = item.totalOrder
+                    )
+                )
+            }
+        }
+
     }
 }
