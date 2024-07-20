@@ -8,9 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.getir.BaseFragment
+import com.getir.R
 import com.getir.adapters.ProductListingAdapter
 import com.getir.adapters.ProductListiningSuggestedAdapter
 import com.getir.databinding.FragmentProductListingBinding
@@ -33,6 +35,9 @@ class ProductListingFragment :
         setupVerticalRecyclerView()
         setupHorizontalRecyclerView()
         binding.apply {
+            customToolBar.chartIconSetOnClickListener {
+                findNavController().navigate(R.id.action_productListingFragment_to_productBasketFragment)
+            }
             viewModel.getProduct()
             viewModel.getSuggestedProduct()
         }

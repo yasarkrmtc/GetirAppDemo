@@ -28,7 +28,7 @@ class ProductListingViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(ProductListViewState())
     val viewState = _viewState.asStateFlow()
 
-    private val _localPrice = MutableStateFlow("0.00")
+    private val _localPrice = MutableStateFlow("₺0.00")
     val localPrice = _localPrice.asStateFlow()
 
     fun getProduct() {

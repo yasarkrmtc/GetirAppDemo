@@ -14,11 +14,9 @@
         android:scaleType="fitXY"
         app:cardCornerRadius="@dimen/size8"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/product_price"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="#F2F0FA"
         app:strokeWidth="@dimen/size1"
         tools:src="@drawable/ic_launcher_foreground">
@@ -31,7 +29,6 @@
             android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/product_price"
             app:layout_constraintEnd_toStartOf="@id/add_button"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/add_button"
             tools:src="@drawable/ic_launcher_foreground" />
@@ -54,8 +51,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/plus_icon"
                     android:layout_margin="@dimen/size2"
                     tools:ignore="ContentDescription" />
@@ -93,8 +88,6 @@
         android:text="₺0,00"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/app_purple"
-        app:layout_constraintBottom_toTopOf="@+id/product_name"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/card_product_image"
         app:layout_constraintTop_toBottomOf="@+id/card_product_image" />
 
@@ -108,8 +101,6 @@
         android:ellipsize="end"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/product_attribute"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/card_product_image"
         app:layout_constraintTop_toBottomOf="@+id/product_price" />
 
@@ -120,8 +111,6 @@
         android:text="Attribute"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/product_price"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/card_product_image"
         app:layout_constraintTop_toBottomOf="@+id/product_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

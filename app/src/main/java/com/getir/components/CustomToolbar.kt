@@ -16,6 +16,19 @@ class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(
     context, attrs
 ) {
     private var textViewPrice:TextView
+
+    fun navigationIconSetOnClickListener(function: (view: View) -> Unit) {
+        navigationIconSetOnClickListener = function
+    }
+
+    fun chartIconSetOnClickListener(function: (view: View) -> Unit) {
+        chartIconSetOnClickListener = function
+    }
+
+    private var chartIconSetOnClickListener: (view: View) -> Unit = {}
+
+    private var navigationIconSetOnClickListener: (view: View) -> Unit = {}
+
     init {
         inflate(context, R.layout.custom_toolbar, this)
         val binding = CustomToolbarBinding.bind(this)
@@ -37,6 +50,10 @@ class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(
         binding.toolbarText.apply {
             text = attributes.getString(R.styleable.CustomToolBar_toolBarText)
             setTextColor(textColor)
+        }
+
+        binding.btnChart.clickWithDebounce {
+            chartIconSetOnClickListener.invoke(it)
         }
 
         attributes.recycle()

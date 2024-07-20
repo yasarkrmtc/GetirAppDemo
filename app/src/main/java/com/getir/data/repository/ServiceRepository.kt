@@ -12,5 +12,7 @@ interface ServiceRepository {
 
     suspend fun getTotalPrice():Flow<Double?>
     suspend fun insertDataBaseItem(item: Product)
+    suspend fun getLocalItems():Flow<List<ItemEntity>>
+
 
 }

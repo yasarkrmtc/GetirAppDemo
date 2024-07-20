@@ -72,6 +72,10 @@ class ServiceRepositoryImpl @Inject constructor(
     }
     override suspend fun getTotalPrice(): Flow<Double?> =cartDAO.getTotalPrice()
 
+    override suspend fun getLocalItems(): Flow<List<ItemEntity>> {
+        return cartDAO.getAllItems()
+    }
+
     override suspend fun insertDataBaseItem(item: Product) {
         if (item.totalOrder == 0) {
             cartDAO.delete(
