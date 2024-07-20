@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.getir.BaseFragment
 import com.getir.adapters.ChartAdapter
@@ -31,7 +32,9 @@ class ProductBasketFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-
+            customToolBar.navigationIconSetOnClickListener {
+                findNavController().popBackStack()
+            }
         }
         setupRecyclerView()
         observeData()

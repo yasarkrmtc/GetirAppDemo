@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import com.getir.R
 import com.getir.databinding.CustomToolbarBinding
 import com.getir.utils.clickWithDebounce
@@ -55,6 +56,8 @@ class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(
         binding.btnChart.clickWithDebounce {
             chartIconSetOnClickListener.invoke(it)
         }
+
+
 
         attributes.recycle()
 
