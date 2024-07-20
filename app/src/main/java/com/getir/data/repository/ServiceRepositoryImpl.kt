@@ -76,6 +76,10 @@ class ServiceRepositoryImpl @Inject constructor(
         return cartDAO.getAllItems()
     }
 
+    override suspend fun getLocalItem(id:String): ItemEntity? {
+        return cartDAO.getItemById(id)
+    }
+
     override suspend fun insertDataBaseItem(item: Product) {
         if (item.totalOrder == 0) {
             cartDAO.delete(

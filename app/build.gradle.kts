@@ -4,6 +4,9 @@ plugins {
     kotlin("kapt")
     id("kotlin-android")
     id ("com.google.dagger.hilt.android")
+    id ("kotlin-parcelize")
+    id ("androidx.navigation.safeargs")
+
 }
 
 android {
@@ -42,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.7.3")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")

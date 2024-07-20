@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.getir.data.api.Product
 import com.getir.data.repository.ItemEntity
 import com.getir.data.usecase.GetLocalItemsUseCase
+import com.getir.data.usecase.GetPrdouctUseCase
 import com.getir.data.usecase.GetTotalPriceUseCase
 import com.getir.data.usecase.InsertDataBaseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,26 +16,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductBasketViewModel @Inject constructor(
+class ProductDetailViewModel @Inject constructor(
     private val getLocalItemsUseCase: GetLocalItemsUseCase,
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
-    private val insertDataBaseUseCase: InsertDataBaseUseCase
+    private val insertDataBaseUseCase: InsertDataBaseUseCase,
+    private val getPrdouctUseCase: GetPrdouctUseCase
 
 ) :
     ViewModel() {
-    private val _items = MutableStateFlow<List<ItemEntity>>(emptyList())
-    val items: StateFlow<List<ItemEntity>> = _items
+    private val _item = MutableStateFlow<ItemEntity?>(null)
+    val item: StateFlow<ItemEntity?> = _item
 
     private val _localPrice = MutableStateFlow("₺0.00")
     val localPrice = _localPrice.asStateFlow()
 
-    fun getLocalItems() {
-        viewModelScope.launch {
-            getLocalItemsUseCase().collect {
-                _items.value = it
-            }
-        }
-    }
 
     fun getTotalPrice() {
         viewModelScope.launch {
@@ -50,10 +45,15 @@ class ProductBasketViewModel @Inject constructor(
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
-            getLocalItems()
+            getProduct(id = item.id)
             getTotalPrice()
         }
+    }
 
+    fun getProduct(id:String){
+        viewModelScope.launch {
+            _item.value = getPrdouctUseCase(id)
+        }
     }
 
 }

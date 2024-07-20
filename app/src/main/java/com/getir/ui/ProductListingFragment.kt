@@ -44,11 +44,17 @@ class ProductListingFragment :
         initListener()
     }
     private fun initListener(){
-        verticalAdapter.onItemClick {
-            viewModel.updateDataBase(it)
-
+        verticalAdapter.buttonClick { product ->
+            viewModel.updateDataBase(product)
         }
+
+        verticalAdapter.itemClick { product ->
+            val action = ProductListingFragmentDirections.actionProductListingFragmentToProductDetailFragment(product)
+            findNavController().navigate(action)
+        }
+
     }
+
 
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {

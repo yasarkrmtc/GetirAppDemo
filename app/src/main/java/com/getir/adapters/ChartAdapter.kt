@@ -1,12 +1,17 @@
 package com.getir.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.getir.R
 import com.getir.data.repository.ItemEntity
 import com.getir.databinding.ChartItemBinding
+import com.getir.databinding.ProductListingCardItemBinding
+import com.getir.utils.clickWithDebounce
 
 class ChartAdapter :
     ListAdapter<ItemEntity, ChartAdapter.ChartViewHolder>(ChartDiffCallback()) {
@@ -24,6 +29,22 @@ class ChartAdapter :
             binding.productName.text = product.name
             binding.productPrice.text = product.priceText
             binding.productAttribute.text = product.attribute
+            binding.stoke.text = product.totalOrder.toString()
+            Glide.with(binding.productImage.context).load(product.thumbnailURL)
+                .into(binding.productImage)
+
+            binding.addButton.clickWithDebounce {
+                product.totalOrder += 1
+                binding.stoke.text = product.totalOrder.toString()
+                onItemClick.invoke(product)
+                updateButtonsVisibility(binding, product.totalOrder)
+            }
+            binding.minus.clickWithDebounce {
+                product.totalOrder -= 1
+                binding.stoke.text = product.totalOrder.toString()
+                onItemClick.invoke(product)
+                updateButtonsVisibility(binding, product.totalOrder)
+            }
 
         }
     }
@@ -51,4 +72,10 @@ class ChartAdapter :
         }
     }
 
+    private fun updateButtonsVisibility(binding: ChartItemBinding, totalOrder: Int) {
+        binding.minus.setImageResource(
+            if (totalOrder == 1) R.drawable.purple_trash_icon else R.drawable.minus_icon
+        )
+
+    }
 }

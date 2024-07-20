@@ -15,11 +15,18 @@ import com.getir.databinding.ProductListingCardItemBinding
 class ProductListingAdapter :
     ListAdapter<Product, ProductListingAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
-    private var onItemClick: (item: Product) -> Unit =
+    private var buttonClick: (item: Product) -> Unit =
         { item -> }
 
-    fun onItemClick(item: (Product) -> Unit) {
-        onItemClick = item
+    fun buttonClick(item: (Product) -> Unit) {
+        buttonClick = item
+    }
+
+    private var itemClick: (item: Product) -> Unit =
+        { item -> }
+
+    fun itemClick(item: (Product) -> Unit) {
+        itemClick = item
     }
 
     inner class ProductViewHolder(private val binding: ProductListingCardItemBinding) :
@@ -29,6 +36,7 @@ class ProductListingAdapter :
             binding.productName.text = product.name
             binding.productPrice.text = product.priceText
             binding.productAttribute.text = product.attribute
+            binding.stoke.text = product.totalOrder.toString()
             if (product.totalOrder == 0) {
                 binding.minus.visibility = View.GONE
                 binding.stoke.visibility = View.GONE
@@ -36,18 +44,23 @@ class ProductListingAdapter :
             Glide.with(binding.productImage.context).load(product.thumbnailURL)
                 .into(binding.productImage)
 
+
             // Set click listener for add button
             binding.addButton.setOnClickListener {
                 product.totalOrder += 1
                 binding.stoke.text = product.totalOrder.toString()
-                onItemClick.invoke(product)
+                buttonClick.invoke(product)
                 updateButtonsVisibility(binding,product.totalOrder)
             }
             binding.minus.setOnClickListener {
                 product.totalOrder -= 1
                 binding.stoke.text = product.totalOrder.toString()
-                onItemClick.invoke(product)
+                buttonClick.invoke(product)
                 updateButtonsVisibility(binding,product.totalOrder)
+            }
+
+            binding.productImage.setOnClickListener {
+                itemClick.invoke(product)
             }
         }
     }

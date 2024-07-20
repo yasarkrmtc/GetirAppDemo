@@ -1,14 +1,17 @@
 package com.getir.data.api
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class ProductResponse(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String?,
     @SerializedName("productCount") val productCount: Int?,
-    @SerializedName("products") val products: List<Product>?
+    @SerializedName("products") var products: List<Product>?
 )
 
+@Parcelize
 data class Product(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String?,
@@ -18,8 +21,8 @@ data class Product(
     @SerializedName("price") val price: Double?,
     @SerializedName("priceText") val priceText: String?,
     @SerializedName("shortDescription") val shortDescription: String?,
-    var totalOrder:Int=0,
-)
+    var totalOrder: Int = 0
+) : Parcelable
 
 data class SuggestedProduct(
     @SerializedName("id") val id: String,

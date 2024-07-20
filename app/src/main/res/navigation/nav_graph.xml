@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_productDetailFragment_to_productBasketFragment"
             app:destination="@id/productBasketFragment" />
+        <argument
+            android:name="product"
+            app:argType="com.getir.data.api.Product" />
     </fragment>
     <fragment
         android:id="@+id/productBasketFragment"

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface CartDAO {
 
 
-    @Query("SELECT * FROM items")
+    @Query("SELECT * FROM items WHERE totalOrder > 0")
     fun getAllItems(): Flow<List<ItemEntity>>
 
     @Query("SELECT * FROM items WHERE id = :itemId")
