@@ -3,6 +3,7 @@ package com.getir.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.getir.data.usecase.FetchProductUseCase
+import com.getir.data.usecase.FetchSuggestedProductUseCase
 import com.getir.model.ResponseStatus
 import com.getir.ui.ProductListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductListingViewModel @Inject constructor(private val fetchProductUseCase: FetchProductUseCase) :
+class ProductListingViewModel @Inject constructor(
+    private val fetchProductUseCase: FetchProductUseCase,
+    private val fetchSuggestedProductUseCase: FetchSuggestedProductUseCase
+) :
     ViewModel() {
 
     private val _viewState = MutableStateFlow(ProductListViewState())
@@ -35,7 +39,40 @@ class ProductListingViewModel @Inject constructor(private val fetchProductUseCas
                             viewState.copy(
                                 isLoading = false,
                                 errorMessage = null,
-                                itemList = response.data
+                                productItemList = response.data
+                            )
+                        }
+
+                        else -> {
+                            _viewState.update { viewState ->
+                                viewState.copy(
+                                    isLoading = false,
+                                    errorMessage = response.message
+                                )
+                            }
+                        }
+                    }
+                }
+        }
+
+    }
+    fun getSuggestedProduct() {
+        viewModelScope.launch {
+            fetchSuggestedProductUseCase()
+                .collect { response ->
+                    when (response.status) {
+                        ResponseStatus.LOADING -> _viewState.update { viewState ->
+                            viewState.copy(
+                                isLoading = true,
+                                errorMessage = null
+                            )
+                        }
+
+                        ResponseStatus.SUCCESS -> _viewState.update { viewState ->
+                            viewState.copy(
+                                isLoading = false,
+                                errorMessage = null,
+                                suggestedProductItemList = response.data
                             )
                         }
 

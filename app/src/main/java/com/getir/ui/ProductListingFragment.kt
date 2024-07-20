@@ -1,6 +1,7 @@
 package com.getir.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.getir.BaseFragment
 import com.getir.adapters.ProductListingAdapter
-import com.getir.data.api.Product
+import com.getir.adapters.ProductListiningSuggestedAdapter
 import com.getir.databinding.FragmentProductListingBinding
 import com.getir.utils.CustomAdaptiveDecoration
 import com.getir.viewModel.ProductListingViewModel
@@ -23,12 +24,17 @@ class ProductListingFragment :
     BaseFragment<FragmentProductListingBinding>(FragmentProductListingBinding::inflate) {
 
     private val viewModel: ProductListingViewModel by viewModels()
+    private val verticalAdapter = ProductListingAdapter()
+    private val horizontalAdapter = ProductListiningSuggestedAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
+        setupVerticalRecyclerView()
+        setupHorizontalRecyclerView()
         binding.apply {
             viewModel.getProduct()
+            viewModel.getSuggestedProduct()
         }
     }
 
@@ -42,9 +48,16 @@ class ProductListingFragment :
                         viewState.isLoading?.let {
                             binding.homeProgressBar.isVisible = it
                         }
-                        viewState.itemList?.let { demoResponses ->
+                        viewState.productItemList?.let { demoResponses ->
+                            Log.e("qqqq",viewState.productItemList.toString())
                             val products = demoResponses.flatMap { it.products ?: emptyList() }
-                            setupRecyclerView(products)
+                            verticalAdapter.submitList(products)
+                        }
+                        viewState.suggestedProductItemList?.let { demoResponses ->
+                            Log.e("qqqq",viewState.suggestedProductItemList.toString())
+
+                            val suggestedProducts = demoResponses.flatMap { it.products ?: emptyList() }
+                            horizontalAdapter.submitList(suggestedProducts)
                         }
                     }
                 }
@@ -52,15 +65,9 @@ class ProductListingFragment :
         }
     }
 
-    private fun setupRecyclerView(products: List<Product>) {
-        val adapter = ProductListingAdapter(products)
-
-        // Horizontal RecyclerView setup remains unchanged
-        binding.recyclerViewHorizontal.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerViewHorizontal.adapter = adapter
-
+    private fun setupVerticalRecyclerView() {
         binding.recyclerViewVertical.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recyclerViewVertical.adapter = adapter
+        binding.recyclerViewVertical.adapter = verticalAdapter
 
         // Apply custom item decoration
         val itemDecoration = CustomAdaptiveDecoration(
@@ -72,4 +79,17 @@ class ProductListingFragment :
         binding.recyclerViewVertical.addItemDecoration(itemDecoration)
     }
 
+    private fun setupHorizontalRecyclerView() {
+        binding.recyclerViewHorizontal.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewHorizontal.adapter = horizontalAdapter
+
+        val itemDecoration = CustomAdaptiveDecoration(
+            context = requireContext(),
+            spanCount = 1,
+            spacingHorizontal = 16,
+            spacingVertical = 0
+        )
+        binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
+    }
 }
+

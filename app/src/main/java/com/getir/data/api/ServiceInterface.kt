@@ -7,6 +7,9 @@ interface ServiceInterface {
 
     @GET("api/products")
     fun fetchProduct(
-    ): Call<List<DemoResponse>>
+    ): Call<List<ProductResponse>>
 
+    @GET("api/suggestedProducts")
+    fun fetchSuggestedProduct(
+    ): Call<List<SuggestedProductResponse>>
 }

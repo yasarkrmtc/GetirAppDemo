@@ -2,7 +2,7 @@ package com.getir.data.api
 
 import com.google.gson.annotations.SerializedName
 
-data class DemoResponse(
+data class ProductResponse(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String?,
     @SerializedName("productCount") val productCount: Int?,
@@ -20,8 +20,23 @@ data class Product(
     @SerializedName("shortDescription") val shortDescription: String?
 )
 
-data class User(
+data class SuggestedProduct(
     @SerializedName("id") val id: String,
-    @SerializedName("email") val email: String?,
-    @SerializedName("password") val password: String?
+    @SerializedName("imageURL") val imageURL: String?,
+    @SerializedName("squareThumbnailURL") val squareThumbnailURL: String?,
+    @SerializedName("price") val price: Double,
+    @SerializedName("name") val name: String,
+    @SerializedName("priceText") val priceText: String,
+    @SerializedName("shortDescription") val shortDescription: String?,
+    @SerializedName("category") val category: String?,
+    @SerializedName("unitPrice") val unitPrice: Double?,
+    @SerializedName("status") val status: Int?
 )
+
+data class SuggestedProductResponse(
+    @SerializedName("products") val products: List<SuggestedProduct>?,
+
+)
+
+
+
