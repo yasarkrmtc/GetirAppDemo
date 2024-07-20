@@ -10,15 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.getir.components.CustomToolBar
+            android:id="@+id/customToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:toolBarBackgroundColor="@color/app_purple"
+            app:toolBarText="@string/title_urunler"
+            app:toolBarTextColor="@color/white" />
+
         <ImageView
             android:id="@+id/productImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="@dimen/size8"
+            android:layout_marginTop="@dimen/size14"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customToolBar"
             app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView

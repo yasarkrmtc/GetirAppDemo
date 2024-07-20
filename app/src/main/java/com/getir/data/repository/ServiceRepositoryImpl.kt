@@ -70,6 +70,7 @@ class ServiceRepositoryImpl @Inject constructor(
             awaitClose()
         }
     }
+    override suspend fun getTotalPrice(): Flow<Double?> =cartDAO.getTotalPrice()
 
     override suspend fun insertDataBaseItem(item: Product) {
         if (item.totalOrder == 0) {

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.getir.R
 import com.getir.data.api.Product
 import com.getir.databinding.ProductListingCardItemBinding
 
@@ -24,22 +25,29 @@ class ProductListingAdapter :
     inner class ProductViewHolder(private val binding: ProductListingCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
+            Log.e("qqqqqqq",product.name.toString())
             binding.productName.text = product.name
             binding.productPrice.text = product.priceText
             binding.productAttribute.text = product.attribute
-            Log.e("ProductImage", product.thumbnailURL.toString())
-            Glide.with(binding.productImage.context).load(product.thumbnailURL).into(binding.productImage)
+            if (product.totalOrder == 0) {
+                binding.minus.visibility = View.GONE
+                binding.stoke.visibility = View.GONE
+            }
+            Glide.with(binding.productImage.context).load(product.thumbnailURL)
+                .into(binding.productImage)
 
             // Set click listener for add button
             binding.addButton.setOnClickListener {
                 product.totalOrder += 1
                 binding.stoke.text = product.totalOrder.toString()
                 onItemClick.invoke(product)
+                updateButtonsVisibility(binding,product.totalOrder)
             }
-            binding.minusButton.setOnClickListener {
+            binding.minus.setOnClickListener {
                 product.totalOrder -= 1
                 binding.stoke.text = product.totalOrder.toString()
                 onItemClick.invoke(product)
+                updateButtonsVisibility(binding,product.totalOrder)
             }
         }
     }
@@ -59,10 +67,24 @@ class ProductListingAdapter :
 
     class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
-}}
+    }
+
+    private fun updateButtonsVisibility(binding: ProductListingCardItemBinding,totalOrder: Int) {
+        if (totalOrder == 0) {
+            binding.minus.visibility = View.GONE
+            binding.stoke.visibility = View.GONE
+        } else {
+            binding.minus.visibility = View.VISIBLE
+            binding.stoke.visibility = View.VISIBLE
+            binding.minus.setImageResource(
+                if (totalOrder == 1) R.drawable.purple_trash_icon else R.drawable.minus_icon
+            )
+        }
+    }
+}

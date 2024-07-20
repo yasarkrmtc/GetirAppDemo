@@ -4,6 +4,7 @@ package com.getir.components
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.getir.R
@@ -14,8 +15,7 @@ import com.getir.utils.clickWithDebounce
 class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(
     context, attrs
 ) {
-
-
+    private var textViewPrice:TextView
     init {
         inflate(context, R.layout.custom_toolbar, this)
         val binding = CustomToolbarBinding.bind(this)
@@ -26,7 +26,7 @@ class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(
         val textColor = attributes.getColor(
             R.styleable.CustomToolBar_toolBarTextColor, context.getColor(R.color.white)
         )
-
+        textViewPrice=binding.tvPrice
 
         val backgroundColor = attributes.getColor(
             R.styleable.CustomToolBar_toolBarBackgroundColor,
@@ -39,7 +39,15 @@ class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(
             setTextColor(textColor)
         }
 
-
         attributes.recycle()
+
+
     }
+    fun setPrice(price:String){
+        textViewPrice.text = price
+
+    }
+
+
+
 }

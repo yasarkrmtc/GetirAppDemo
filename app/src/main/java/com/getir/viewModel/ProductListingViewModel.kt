@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.getir.data.api.Product
 import com.getir.data.usecase.FetchProductUseCase
 import com.getir.data.usecase.FetchSuggestedProductUseCase
+import com.getir.data.usecase.GetTotalPriceUseCase
 import com.getir.data.usecase.InsertDataBaseUseCase
 import com.getir.model.ResponseStatus
 import com.getir.ui.ProductListViewState
@@ -19,12 +20,16 @@ import javax.inject.Inject
 class ProductListingViewModel @Inject constructor(
     private val fetchProductUseCase: FetchProductUseCase,
     private val fetchSuggestedProductUseCase: FetchSuggestedProductUseCase,
-    private val insertDataBaseUseCase: InsertDataBaseUseCase
+    private val insertDataBaseUseCase: InsertDataBaseUseCase,
+    private val getTotalPriceUseCase: GetTotalPriceUseCase
 ) :
     ViewModel() {
 
     private val _viewState = MutableStateFlow(ProductListViewState())
     val viewState = _viewState.asStateFlow()
+
+    private val _localPrice = MutableStateFlow("0.00")
+    val localPrice = _localPrice.asStateFlow()
 
     fun getProduct() {
         viewModelScope.launch {
@@ -92,9 +97,21 @@ class ProductListingViewModel @Inject constructor(
         }
 
     }
+    fun getTotalPrice() {
+        viewModelScope.launch {
+            getTotalPriceUseCase().collect {
+                it?.let {
+                    _localPrice.value = "₺" + String.format("%.2f", it)
+                }
+                if (it==null)_localPrice.value = "₺0.00"
+            }
+        }
+    }
+
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
         }
+        getTotalPrice()
     }
 }

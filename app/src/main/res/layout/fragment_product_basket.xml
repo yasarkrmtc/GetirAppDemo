@@ -6,8 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".ui.ProductBasketFragment">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/view_grey_color"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewHorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewVertical" />
+
+    <com.getir.components.CustomToolBar
+        android:id="@+id/customToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolBarBackgroundColor="@color/app_purple"
+        app:toolBarText="@string/title_urunler"
+        app:toolBarTextColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewVertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customToolBar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/size10"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewVertical" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
 
 
 

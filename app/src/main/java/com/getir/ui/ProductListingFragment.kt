@@ -41,6 +41,7 @@ class ProductListingFragment :
     private fun initListener(){
         verticalAdapter.onItemClick {
             viewModel.updateDataBase(it)
+
         }
     }
 
@@ -66,6 +67,13 @@ class ProductListingFragment :
                             horizontalAdapter.submitList(suggestedProducts)
                         }
                     }
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.localPrice.collect { price ->
+                  binding.customToolBar.setPrice(price)
                 }
             }
         }
