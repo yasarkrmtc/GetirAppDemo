@@ -1,6 +1,5 @@
 package com.getir.ui
 
-
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,13 +9,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.getir.BaseFragment
+import com.getir.R
 import com.getir.adapters.ChartAdapter
-import com.getir.adapters.ProductListingAdapter
 import com.getir.data.api.Product
 import com.getir.databinding.FragmentProductBasketBinding
 import com.getir.utils.CustomAdaptiveDecoration
 import com.getir.viewModel.ProductBasketViewModel
-import com.getir.viewModel.ProductListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -27,14 +25,10 @@ class ProductBasketFragment :
 
     private val adapter = ChartAdapter()
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            customToolBar.navigationIconSetOnClickListener {
-                findNavController().popBackStack()
-            }
+
         }
         setupRecyclerView()
         observeData()
@@ -43,12 +37,12 @@ class ProductBasketFragment :
         initListener()
     }
 
-    private fun initListener(){
+    private fun initListener() {
         adapter.onItemClick {
             viewModel.updateDataBase(
                 Product(
                     id = it.id,
-                    name=it.name,
+                    name = it.name,
                     attribute = it.attribute,
                     thumbnailURL = it.thumbnailURL,
                     imageURL = it.imageURL,
@@ -61,12 +55,13 @@ class ProductBasketFragment :
 
         }
     }
+
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.items.collect { items ->
                 if (items.isNotEmpty()) {
                     adapter.submitList(items)
-                }else{
+                } else {
                     adapter.submitList(listOf())
                 }
 
@@ -80,16 +75,13 @@ class ProductBasketFragment :
             }
         }
     }
+
     private fun setupRecyclerView() {
         binding.recyclerViewVertical.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerViewVertical.adapter = adapter
 
-        // Apply custom item decoration
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(),
-            spanCount = 1,
-            spacingHorizontal = 0,
-            spacingVertical = 16
+            context = requireContext(), spanCount = 1, spacingHorizontal = 0, spacingVertical = 16
         )
         binding.recyclerViewVertical.addItemDecoration(itemDecoration)
     }

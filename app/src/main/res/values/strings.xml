@@ -3,4 +3,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_urunler">Ürünler</string>
+    <string name="title_sepetim">Sepetim</string>
+    <string name="title_urun_detayı">Ürün Detayı</string>
+    <string name="product_name_chart">Product Name</string>
+    <string name="_0_00">₺0,00</string>
+    <string name="attribute_text_chart">Attribute</string>
+    <string name="_0">0</string>
+    <string name="sipari_tamamla_button_text">Sipariş Tamamla</string>
+    <string name="_1_500_00">₺1.500,00</string>
 </resources>

@@ -43,13 +43,17 @@ class ProductListingFragment :
         }
         initListener()
     }
-    private fun initListener(){
+
+    private fun initListener() {
         verticalAdapter.buttonClick { product ->
             viewModel.updateDataBase(product)
         }
 
         verticalAdapter.itemClick { product ->
-            val action = ProductListingFragmentDirections.actionProductListingFragmentToProductDetailFragment(product)
+            val action =
+                ProductListingFragmentDirections.actionProductListingFragmentToProductDetailFragment(
+                    product
+                )
             findNavController().navigate(action)
         }
 
@@ -67,14 +71,15 @@ class ProductListingFragment :
                             binding.homeProgressBar.isVisible = it
                         }
                         viewState.productItemList?.let { demoResponses ->
-                            Log.e("qqqq",viewState.productItemList.toString())
+                            Log.e("qqqq", viewState.productItemList.toString())
                             val products = demoResponses.flatMap { it.products ?: emptyList() }
                             verticalAdapter.submitList(products)
                         }
                         viewState.suggestedProductItemList?.let { demoResponses ->
-                            Log.e("qqqq",viewState.suggestedProductItemList.toString())
+                            Log.e("qqqq", viewState.suggestedProductItemList.toString())
 
-                            val suggestedProducts = demoResponses.flatMap { it.products ?: emptyList() }
+                            val suggestedProducts =
+                                demoResponses.flatMap { it.products ?: emptyList() }
                             horizontalAdapter.submitList(suggestedProducts)
                         }
                     }
@@ -84,7 +89,7 @@ class ProductListingFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.localPrice.collect { price ->
-                  binding.customToolBar.setPrice(price)
+                    binding.customToolBar.setPrice(price)
                 }
             }
         }
@@ -94,25 +99,19 @@ class ProductListingFragment :
         binding.recyclerViewVertical.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerViewVertical.adapter = verticalAdapter
 
-        // Apply custom item decoration
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(),
-            spanCount = 3,
-            spacingHorizontal = 16,
-            spacingVertical = 16
+            context = requireContext(), spanCount = 3, spacingHorizontal = 16, spacingVertical = 16
         )
         binding.recyclerViewVertical.addItemDecoration(itemDecoration)
     }
 
     private fun setupHorizontalRecyclerView() {
-        binding.recyclerViewHorizontal.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewHorizontal.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewHorizontal.adapter = horizontalAdapter
 
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(),
-            spanCount = 1,
-            spacingHorizontal = 16,
-            spacingVertical = 0
+            context = requireContext(), spanCount = 1, spacingHorizontal = 16, spacingVertical = 0
         )
         binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
     }

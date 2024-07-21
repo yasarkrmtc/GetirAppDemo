@@ -1,6 +1,5 @@
 package com.getir.utils
 
-
 import android.content.Context
 import android.graphics.Rect
 import android.util.TypedValue
@@ -16,22 +15,17 @@ class CustomAdaptiveDecoration(
     private val spacingVertical: Int,
     private var includeEdge: Boolean = true,
     private var orientation: Int = LinearLayoutManager.VERTICAL
-) :
-    RecyclerView.ItemDecoration() {
+) : RecyclerView.ItemDecoration() {
     private var spacingHorizontalPx: Int = 0
     private var spacingVerticalPx: Int = 0
 
     init {
         val metrics = context.resources.displayMetrics
         spacingHorizontalPx = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            spacingHorizontal!!.toFloat(),
-            metrics
+            TypedValue.COMPLEX_UNIT_DIP, spacingHorizontal!!.toFloat(), metrics
         ).toInt()
         spacingVerticalPx = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            spacingVertical.toFloat(),
-            metrics
+            TypedValue.COMPLEX_UNIT_DIP, spacingVertical.toFloat(), metrics
         ).toInt()
     }
 

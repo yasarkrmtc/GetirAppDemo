@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitInstance {
 
-
     @Singleton
     @Provides
     fun getService(): ServiceInterface {
@@ -42,7 +41,6 @@ object RetrofitInstance {
 
         return OkHttpClient.Builder()
             .addInterceptor(logging)
-            //.addInterceptor(ChuckerInterceptor(provideContext(App.instance)))
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
@@ -55,5 +53,4 @@ object RetrofitInstance {
             }
             .build()
     }
-
 }

@@ -14,7 +14,6 @@ import com.getir.ui.ProductListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,8 +25,7 @@ class ProductListingViewModel @Inject constructor(
     private val insertDataBaseUseCase: InsertDataBaseUseCase,
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
     private val getLocalItemsUseCase: GetLocalItemsUseCase,
-    ) :
-    ViewModel() {
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ProductListViewState())
     val viewState = _viewState.asStateFlow()
@@ -39,7 +37,7 @@ class ProductListingViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getLocalItemsUseCase.invoke().collect{
+            getLocalItemsUseCase.invoke().collect {
                 localItems = it
             }
         }
@@ -48,13 +46,11 @@ class ProductListingViewModel @Inject constructor(
 
     fun getProduct() {
         viewModelScope.launch {
-            fetchProductUseCase()
-                .collect { response ->
+            fetchProductUseCase().collect { response ->
                     when (response.status) {
                         ResponseStatus.LOADING -> _viewState.update { viewState ->
                             viewState.copy(
-                                isLoading = true,
-                                errorMessage = null
+                                isLoading = true, errorMessage = null
                             )
                         }
 
@@ -63,7 +59,9 @@ class ProductListingViewModel @Inject constructor(
                                 productResponse.apply {
                                     products = products?.map { product ->
                                         product.apply {
-                                            totalOrder = localItems.find { it.id == product.id }?.totalOrder ?: 0
+                                            totalOrder =
+                                                localItems.find { it.id == product.id }?.totalOrder
+                                                    ?: 0
                                         }
                                     }
                                 }
@@ -76,36 +74,33 @@ class ProductListingViewModel @Inject constructor(
                                 )
                             }
                             _viewState.update { viewState ->
-                            viewState.copy(
-                                isLoading = false,
-                                errorMessage = null,
-                                productItemList = response.data
-                            )
-                        }
+                                viewState.copy(
+                                    isLoading = false,
+                                    errorMessage = null,
+                                    productItemList = response.data
+                                )
+                            }
                         }
 
                         else -> {
                             _viewState.update { viewState ->
                                 viewState.copy(
-                                    isLoading = false,
-                                    errorMessage = response.message
+                                    isLoading = false, errorMessage = response.message
                                 )
                             }
                         }
                     }
                 }
         }
-
     }
+
     fun getSuggestedProduct() {
         viewModelScope.launch {
-            fetchSuggestedProductUseCase()
-                .collect { response ->
+            fetchSuggestedProductUseCase().collect { response ->
                     when (response.status) {
                         ResponseStatus.LOADING -> _viewState.update { viewState ->
                             viewState.copy(
-                                isLoading = true,
-                                errorMessage = null
+                                isLoading = true, errorMessage = null
                             )
                         }
 
@@ -120,23 +115,22 @@ class ProductListingViewModel @Inject constructor(
                         else -> {
                             _viewState.update { viewState ->
                                 viewState.copy(
-                                    isLoading = false,
-                                    errorMessage = response.message
+                                    isLoading = false, errorMessage = response.message
                                 )
                             }
                         }
                     }
                 }
         }
-
     }
+
     fun getTotalPrice() {
         viewModelScope.launch {
             getTotalPriceUseCase().collect {
                 it?.let {
                     _localPrice.value = "₺" + String.format("%.2f", it)
                 }
-                if (it==null)_localPrice.value = "₺0.00"
+                if (it == null) _localPrice.value = "₺0.00"
             }
         }
     }

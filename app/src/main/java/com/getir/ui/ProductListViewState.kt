@@ -8,6 +8,4 @@ data class ProductListViewState (
     val errorMessage: String? = null,
     val productItemList: List<ProductResponse>? = null,
     val suggestedProductItemList: List<SuggestedProductResponse>? = null
-
 )
-

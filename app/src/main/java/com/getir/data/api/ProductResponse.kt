@@ -40,8 +40,4 @@ data class SuggestedProduct(
 
 data class SuggestedProductResponse(
     @SerializedName("products") val products: List<SuggestedProduct>?,
-
 )
-
-
-

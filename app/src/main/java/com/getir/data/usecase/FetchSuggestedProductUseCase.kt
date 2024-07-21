@@ -10,5 +10,4 @@ class FetchSuggestedProductUseCase @Inject constructor(
     private val repositoryImpl: ServiceRepositoryImpl
 ) {
     suspend operator fun invoke() : Flow<Response<List<SuggestedProductResponse>>> = repositoryImpl.getSuggestedProducts()
-
 }

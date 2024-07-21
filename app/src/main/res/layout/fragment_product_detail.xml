@@ -4,99 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.ProductDetailFragment">
-
-
+    <com.getir.components.CustomToolBar
+        android:id="@+id/customToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolBarBackgroundColor="@color/app_purple"
+        app:toolBarText="@string/title_urun_detayı"
+        app:toolBarTextColor="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/size8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customToolBar">
 
-        <com.getir.components.CustomToolBar
-            android:id="@+id/customToolBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:toolBarBackgroundColor="@color/app_purple"
-            app:toolBarText="@string/title_urunler"
-            app:toolBarTextColor="@color/white" />
 
         <ImageView
             android:id="@+id/productImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="@dimen/size14"
+            android:layout_width="@dimen/size100"
+            android:layout_height="@dimen/size100"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customToolBar"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:layout_marginTop="@dimen/size8"
-            android:textColor="@color/app_purple"
             android:text="₺0,00"
-            app:layout_constraintTop_toBottomOf="@id/productImage"
-            app:layout_constraintStart_toStartOf="@id/productImage"
+            android:gravity="center"
+            android:textColor="@color/app_purple"
+            android:textSize="@dimen/header2Size"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/productImage"
-            app:layout_constraintHorizontal_bias="0.5" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/productImage"
+            app:layout_constraintTop_toBottomOf="@id/productImage" />
 
         <TextView
             android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Product Name"
             android:layout_marginTop="@dimen/size2"
-            app:layout_constraintTop_toBottomOf="@id/productPrice"
-            app:layout_constraintStart_toStartOf="@id/productPrice"
+            android:text="Product Name"
+            android:gravity="center"
+            android:textSize="@dimen/header4Size"
             app:layout_constraintEnd_toEndOf="@id/productPrice"
-            app:layout_constraintHorizontal_bias="0.5" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/productPrice"
+            app:layout_constraintTop_toBottomOf="@id/productPrice" />
 
         <TextView
             android:id="@+id/productAttribute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:text="Attribute"
-            android:layout_marginBottom="@dimen/size8"
             android:layout_marginTop="@dimen/size1"
-            app:layout_constraintTop_toBottomOf="@id/productName"
-            app:layout_constraintStart_toStartOf="@id/productName"
-            app:layout_constraintEnd_toEndOf="@id/productName"
+            android:layout_marginBottom="@dimen/size8"
+            android:text="Attribute"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/body4Size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" />
+            app:layout_constraintEnd_toEndOf="@id/productName"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/productName"
+            app:layout_constraintTop_toBottomOf="@id/productName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constrait_bottom"
+        android:id="@+id/constraint_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/size8"
         android:background="@color/white"
+        android:padding="@dimen/size12"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            app:cardCornerRadius="@dimen/size4"
-            app:strokeWidth="0dp"
-            android:visibility="gone"
-            app:cardElevation="@dimen/size1"
             android:layout_margin="@dimen/size2"
+            android:backgroundTint="@color/white"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/size4"
+            app:cardElevation="@dimen/size1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,11 +117,12 @@
                     android:id="@+id/minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size6"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/size6"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/minus_icon"
                     tools:ignore="ContentDescription" />
+
                 <TextView
                     android:id="@+id/stoke"
                     android:layout_width="match_parent"
@@ -130,8 +141,8 @@
                     android:id="@+id/add_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size6"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/size6"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/plus_icon"
                     tools:ignore="ContentDescription" />
@@ -143,12 +154,11 @@
             android:id="@+id/chart_add"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cornerRadius="@dimen/size4"
             android:backgroundTint="@color/app_purple"
-            android:visibility="gone"
             android:paddingVertical="@dimen/size8"
             android:text="Sepete Ekle"
-            />
+            android:visibility="gone"
+            app:cornerRadius="@dimen/size4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

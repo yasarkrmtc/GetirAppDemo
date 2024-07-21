@@ -45,7 +45,6 @@ class ProductListingAdapter :
                 .into(binding.productImage)
 
 
-            // Set click listener for add button
             binding.addButton.setOnClickListener {
                 product.totalOrder += 1
                 binding.stoke.text = product.totalOrder.toString()

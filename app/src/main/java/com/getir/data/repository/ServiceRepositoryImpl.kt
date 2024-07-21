@@ -13,8 +13,7 @@ import retrofit2.Callback
 import javax.inject.Inject
 
 class ServiceRepositoryImpl @Inject constructor(
-    private val serviceInterface: ServiceInterface,
-    private val cartDAO: CartDAO
+    private val serviceInterface: ServiceInterface, private val cartDAO: CartDAO
 ) : ServiceRepository {
 
     override suspend fun getProducts(): Flow<Response<List<ProductResponse>>> {
@@ -33,8 +32,7 @@ class ServiceRepositoryImpl @Inject constructor(
                 override fun onFailure(call: Call<List<ProductResponse>>, t: Throwable) {
                     trySend(
                         Response.Error(
-                            _code = t.hashCode().toString(),
-                            _message = t.localizedMessage
+                            _code = t.hashCode().toString(), _message = t.localizedMessage
                         )
                     )
                 }
@@ -60,8 +58,7 @@ class ServiceRepositoryImpl @Inject constructor(
                 override fun onFailure(call: Call<List<SuggestedProductResponse>>, t: Throwable) {
                     trySend(
                         Response.Error(
-                            _code = t.hashCode().toString(),
-                            _message = t.localizedMessage
+                            _code = t.hashCode().toString(), _message = t.localizedMessage
                         )
                     )
                 }
@@ -70,13 +67,14 @@ class ServiceRepositoryImpl @Inject constructor(
             awaitClose()
         }
     }
-    override suspend fun getTotalPrice(): Flow<Double?> =cartDAO.getTotalPrice()
+
+    override suspend fun getTotalPrice(): Flow<Double?> = cartDAO.getTotalPrice()
 
     override suspend fun getLocalItems(): Flow<List<ItemEntity>> {
         return cartDAO.getAllItems()
     }
 
-    override suspend fun getLocalItem(id:String): ItemEntity? {
+    override suspend fun getLocalItem(id: String): ItemEntity? {
         return cartDAO.getItemById(id)
     }
 
@@ -117,6 +115,5 @@ class ServiceRepositoryImpl @Inject constructor(
                 )
             }
         }
-
     }
 }

@@ -2,12 +2,10 @@ package com.getir.data.repository
 
 import android.app.Application
 import android.content.Context
-import com.getir.data.api.ServiceInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
@@ -19,6 +17,4 @@ object RepositoryModule {
     fun provideContext(application: Application): Context {
         return application.applicationContext
     }
-    
-
 }

@@ -1,7 +1,6 @@
 package com.getir.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.getir.R
 import com.getir.data.repository.ItemEntity
 import com.getir.databinding.ChartItemBinding
-import com.getir.databinding.ProductListingCardItemBinding
 import com.getir.utils.clickWithDebounce
 
 class ChartAdapter :

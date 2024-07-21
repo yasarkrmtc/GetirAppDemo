@@ -10,6 +10,5 @@
         <attr name="action_first_icon_visibility" format="boolean" />
         <attr name="action_second_icon" format="reference" />
         <attr name="action_second_icon_visibility" format="boolean" />
-
     </declare-styleable>
 </resources>

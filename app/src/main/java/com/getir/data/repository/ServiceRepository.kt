@@ -9,12 +9,8 @@ import kotlinx.coroutines.flow.Flow
 interface ServiceRepository {
     suspend fun getProducts(): Flow<Response<List<ProductResponse>>>
     suspend fun getSuggestedProducts(): Flow<Response<List<SuggestedProductResponse>>>
-
     suspend fun getTotalPrice():Flow<Double?>
     suspend fun insertDataBaseItem(item: Product)
     suspend fun getLocalItems():Flow<List<ItemEntity>>
-
     suspend fun getLocalItem(id:String): ItemEntity ?
-
-
 }

@@ -34,22 +34,24 @@ class ProductDetailFragment :
         product = args.product
         viewModel.getTotalPrice()
         binding.apply {
-            customToolBar.navigationIconSetOnClickListener {
-                findNavController().popBackStack()
+            customToolBar.chartIconSetOnClickListener {
+                findNavController().navigate(R.id.action_productDetailFragment_to_productBasketFragment)
             }
+
             product.let {
-                Glide.with(requireContext()).load(product.thumbnailURL)
-                    .into(productImage)
+                Glide.with(requireContext()).load(product.thumbnailURL).into(productImage)
                 productName.text = it.name
                 productPrice.text = it.priceText
                 productAttribute.text = it.attribute
-                if (it.totalOrder == 0) chartAdd.visibility = View.VISIBLE
-                else if (it.totalOrder == 1) binding.minus.setImageResource(
-                    R.drawable.purple_trash_icon
-                )
-                else {
-                    cardAdd.visibility = View.VISIBLE
-                    stoke.text = it.totalOrder.toString()
+                when (it.totalOrder) {
+                    0 -> chartAdd.visibility = View.VISIBLE
+                    1 -> binding.minus.setImageResource(
+                        R.drawable.purple_trash_icon
+                    )
+                    else -> {
+                        cardAdd.visibility = View.VISIBLE
+                        stoke.text = it.totalOrder.toString()
+                    }
                 }
             }
         }

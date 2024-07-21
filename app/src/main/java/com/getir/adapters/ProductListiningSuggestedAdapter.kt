@@ -26,9 +26,7 @@ class ProductListiningSuggestedAdapter :
 
             }
 
-            // Set click listener for add button
             binding.addButton.setOnClickListener {
-                // Handle add button click
             }
         }
     }

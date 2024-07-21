@@ -28,6 +28,7 @@
         android:id="@+id/customToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:navigation_icon_visibility="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,13 +53,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/size10"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewHorizontal" />
+
     <ProgressBar
         android:id="@+id/home_progressBar"
         android:layout_width="wrap_content"
@@ -69,10 +71,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-

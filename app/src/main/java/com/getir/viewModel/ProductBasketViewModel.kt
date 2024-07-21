@@ -20,8 +20,7 @@ class ProductBasketViewModel @Inject constructor(
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
     private val insertDataBaseUseCase: InsertDataBaseUseCase
 
-) :
-    ViewModel() {
+) : ViewModel() {
     private val _items = MutableStateFlow<List<ItemEntity>>(emptyList())
     val items: StateFlow<List<ItemEntity>> = _items
 
@@ -42,7 +41,7 @@ class ProductBasketViewModel @Inject constructor(
                 it?.let {
                     _localPrice.value = "₺" + String.format("%.2f", it)
                 }
-                if (it==null)_localPrice.value = "₺0.00"
+                if (it == null) _localPrice.value = "₺0.00"
             }
         }
     }
@@ -55,5 +54,4 @@ class ProductBasketViewModel @Inject constructor(
         }
 
     }
-
 }
