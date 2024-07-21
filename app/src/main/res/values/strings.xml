@@ -11,4 +11,5 @@
     <string name="_0">0</string>
     <string name="sipari_tamamla_button_text">Sipariş Tamamla</string>
     <string name="_1_500_00">₺1.500,00</string>
+    <string name="sepete_ekle">Sepete Ekle</string>
 </resources>

@@ -37,6 +37,10 @@ class ProductDetailFragment :
             customToolBar.chartIconSetOnClickListener {
                 findNavController().navigate(R.id.action_productDetailFragment_to_productBasketFragment)
             }
+            customToolBar.navigationIconCloseSetOnClickListener {
+                findNavController().popBackStack()
+
+            }
 
             product.let {
                 Glide.with(requireContext()).load(product.thumbnailURL).into(productImage)

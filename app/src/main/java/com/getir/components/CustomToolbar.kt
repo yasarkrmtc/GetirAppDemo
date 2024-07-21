@@ -18,7 +18,7 @@ class CustomToolBar(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     private lateinit var btnChart: View
     private lateinit var whiteTrashBtn: View
 
-    fun navigationIconSetOnClickListener(function: (view: View) -> Unit) {
+    fun navigationIconCloseSetOnClickListener(function: (view: View) -> Unit) {
         navigationIconSetOnClickListener = function
     }
 

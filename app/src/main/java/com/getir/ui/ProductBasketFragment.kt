@@ -2,6 +2,7 @@ package com.getir.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,7 +10,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.getir.BaseFragment
-import com.getir.R
 import com.getir.adapters.ChartAdapter
 import com.getir.data.api.Product
 import com.getir.databinding.FragmentProductBasketBinding
@@ -28,7 +28,15 @@ class ProductBasketFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            customToolBar.navigationIconCloseSetOnClickListener {
+                findNavController().popBackStack()
+            }
+            customToolBar.whiteTrashBtnSetOnClickListener {
+                showClearCartConfirmationDialog()
+            }
+            orderDoneButtonCard.setOnClickListener {
 
+            }
         }
         setupRecyclerView()
         observeData()
@@ -52,7 +60,6 @@ class ProductBasketFragment :
                     totalOrder = it.totalOrder
                 )
             )
-
         }
     }
 
@@ -64,7 +71,6 @@ class ProductBasketFragment :
                 } else {
                     adapter.submitList(listOf())
                 }
-
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
@@ -85,4 +91,23 @@ class ProductBasketFragment :
         )
         binding.recyclerViewVertical.addItemDecoration(itemDecoration)
     }
+
+    private fun showClearCartConfirmationDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Sepetini boşaltmak istediğinden emin misin?")
+            .setCancelable(false)
+            .setPositiveButton("Evet") { dialog, id ->
+                lifecycleScope.launch {
+                    viewModel.clearDatabase()
+
+                }
+            }
+            .setNegativeButton("Hayır") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
+    }
+
+
 }

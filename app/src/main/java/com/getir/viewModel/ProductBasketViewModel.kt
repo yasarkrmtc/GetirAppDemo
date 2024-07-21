@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.getir.data.api.Product
 import com.getir.data.repository.ItemEntity
+import com.getir.data.usecase.DeleteAllItemsUseCase
 import com.getir.data.usecase.GetLocalItemsUseCase
 import com.getir.data.usecase.GetTotalPriceUseCase
 import com.getir.data.usecase.InsertDataBaseUseCase
@@ -18,7 +19,9 @@ import javax.inject.Inject
 class ProductBasketViewModel @Inject constructor(
     private val getLocalItemsUseCase: GetLocalItemsUseCase,
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
-    private val insertDataBaseUseCase: InsertDataBaseUseCase
+    private val insertDataBaseUseCase: InsertDataBaseUseCase,
+    private val deleteAllItemsUseCase: DeleteAllItemsUseCase
+
 
 ) : ViewModel() {
     private val _items = MutableStateFlow<List<ItemEntity>>(emptyList())
@@ -53,5 +56,12 @@ class ProductBasketViewModel @Inject constructor(
             getTotalPrice()
         }
 
+    }
+    fun clearDatabase() {
+        viewModelScope.launch {
+            deleteAllItemsUseCase()
+            getLocalItems()
+            getTotalPrice()
+        }
     }
 }

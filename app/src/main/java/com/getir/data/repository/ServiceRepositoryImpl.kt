@@ -77,6 +77,9 @@ class ServiceRepositoryImpl @Inject constructor(
     override suspend fun getLocalItem(id: String): ItemEntity? {
         return cartDAO.getItemById(id)
     }
+     suspend fun deleteAllItems() {
+        return cartDAO.deleteAll()
+    }
 
     override suspend fun insertDataBaseItem(item: Product) {
         if (item.totalOrder == 0) {
@@ -115,5 +118,7 @@ class ServiceRepositoryImpl @Inject constructor(
                 )
             }
         }
+
     }
+
 }
