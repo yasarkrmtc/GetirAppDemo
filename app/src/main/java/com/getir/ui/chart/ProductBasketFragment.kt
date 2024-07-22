@@ -114,7 +114,7 @@ class ProductBasketFragment :
         binding.recyclerViewVertical.adapter = adapter
 
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(), spanCount = 1, spacingHorizontal = 0, spacingVertical = 16
+            context = requireContext(), spanCount = 1, spacingHorizontal = 0, spacingVertical = 0
         )
         binding.recyclerViewVertical.addItemDecoration(itemDecoration)
     }
@@ -180,7 +180,7 @@ class ProductBasketFragment :
         binding.recyclerViewHorizontal.adapter = horizontalAdapter
 
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(), spanCount = 1, spacingHorizontal = 8, spacingVertical = 8
+            context = requireContext(), spanCount = 1, spacingHorizontal = 10, spacingVertical = 10
         )
         binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
     }
