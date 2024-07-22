@@ -24,14 +24,31 @@
         android:id="@+id/recyclerViewVertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size0"
-        android:layout_marginBottom="@dimen/size10"
         android:background="@color/white"
+        android:layout_marginBottom="@dimen/size10"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/recyclerViewHorizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/customToolBar" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/nerilen_r_nler"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/size4"
+        android:layout_marginBottom="@dimen/size2"
+        android:textSize="@dimen/body4Size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewHorizontal"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHorizontal"
@@ -40,6 +57,7 @@
         android:layout_marginTop="@dimen/size10"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:paddingVertical="@dimen/size4"
         android:layout_marginBottom="@dimen/size8"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/constrait_bottom"

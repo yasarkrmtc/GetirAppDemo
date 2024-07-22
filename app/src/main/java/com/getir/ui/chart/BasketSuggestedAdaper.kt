@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.getir.data.remote.Product
 import com.getir.databinding.SuggesteProductListingCardItemBinding
+import com.getir.utils.clickWithDebounce
 
 class BasketSuggestedAdaper :
     ListAdapter<Product, BasketSuggestedAdaper.ProductViewHolder>(ProductDiffCallback()) {
@@ -42,7 +43,7 @@ class BasketSuggestedAdaper :
 
 
 
-            binding.addButton.setOnClickListener {
+            binding.addButton.clickWithDebounce {
                 product.totalOrder = 1
                 buttonClick.invoke(product)
 

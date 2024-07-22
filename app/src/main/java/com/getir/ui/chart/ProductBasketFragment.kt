@@ -16,6 +16,7 @@ import com.getir.R
 import com.getir.data.remote.Product
 import com.getir.databinding.FragmentProductBasketBinding
 import com.getir.utils.CustomAdaptiveDecoration
+import com.getir.utils.clickWithDebounce
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -37,7 +38,7 @@ class ProductBasketFragment :
             customToolBar.whiteTrashBtnSetOnClickListener {
                 checkAndShowClearCartConfirmationDialog()
             }
-            orderDoneButtonCard.setOnClickListener {
+            orderDoneButtonCard.clickWithDebounce {
                 checkAndShowOrderCompleteDialog()
             }
         }
@@ -180,7 +181,7 @@ class ProductBasketFragment :
         binding.recyclerViewHorizontal.adapter = horizontalAdapter
 
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(), spanCount = 1, spacingHorizontal = 10, spacingVertical = 10
+            context = requireContext(), spanCount = 1, spacingHorizontal = 10, spacingVertical = 10, orientation = LinearLayoutManager.HORIZONTAL
         )
         binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
     }

@@ -114,7 +114,7 @@ class ProductListingFragment :
         binding.recyclerViewHorizontal.adapter = horizontalAdapter
 
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(), spanCount = 1, spacingHorizontal = 8, spacingVertical = 8
+            context = requireContext(), spanCount = 1, spacingHorizontal = 8, spacingVertical = 8 , orientation = LinearLayoutManager.HORIZONTAL
         )
         binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
     }

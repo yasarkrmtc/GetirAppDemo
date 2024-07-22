@@ -17,4 +17,5 @@
     <string name="order_complete_message">Siparişiniz Tamamlandı!</string>
     <string name="no_items_to_delete">Silinecek ürün yok.</string>
     <string name="add_items_first">İlk önce ürün eklemelisiniz !</string>
+    <string name="nerilen_r_nler">Önerilen Ürünler</string>
 </resources>

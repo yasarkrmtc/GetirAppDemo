@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/app_purple</item> <!-- Add this line -->
+        <item name="android:windowBackground">@color/view_grey_color</item>
     </style>
 
     <style name="Theme.Getir" parent="Base.Theme.Getir" />

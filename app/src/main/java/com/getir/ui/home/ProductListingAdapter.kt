@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.getir.R
 import com.getir.data.remote.Product
 import com.getir.databinding.ProductListingCardItemBinding
+import com.getir.utils.clickWithDebounce
 
 class ProductListingAdapter :
     ListAdapter<Product, ProductListingAdapter.ProductViewHolder>(ProductDiffCallback()) {
@@ -42,20 +43,20 @@ class ProductListingAdapter :
 
             updateButtonsVisibility(binding, product.totalOrder)
 
-            binding.addButton.setOnClickListener {
+            binding.addButton.clickWithDebounce() {
                 product.totalOrder += 1
                 binding.stoke.text = product.totalOrder.toString()
                 buttonClick.invoke(product)
                 updateButtonsVisibility(binding, product.totalOrder)
             }
-            binding.minus.setOnClickListener {
+            binding.minus.clickWithDebounce() {
                 product.totalOrder -= 1
                 binding.stoke.text = product.totalOrder.toString()
                 buttonClick.invoke(product)
                 updateButtonsVisibility(binding, product.totalOrder)
             }
 
-            binding.productImage.setOnClickListener {
+            binding.productImage.clickWithDebounce {
                 itemClick.invoke(product)
             }
         }

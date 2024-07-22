@@ -17,7 +17,6 @@
         android:theme="@style/Theme.Getir"
         tools:targetApi="31">
 
-        <!-- Splash Activity -->
         <activity
             android:name=".ui.splash.SplashScreenActivity"
             android:exported="true"
@@ -31,7 +30,9 @@
         <!-- Main Activity -->
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
