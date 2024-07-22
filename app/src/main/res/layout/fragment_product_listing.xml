@@ -6,23 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.ProductListingFragment">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size0"
-        android:background="@color/view_grey_color"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewHorizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customToolBar" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size0"
-        android:background="@color/view_grey_color"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewVertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHorizontal" />
+
+
 
     <com.getir.components.CustomToolBar
         android:id="@+id/customToolBar"

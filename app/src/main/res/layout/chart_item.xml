@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/size4"
+    android:paddingHorizontal="@dimen/size4"
     android:elevation="@dimen/size0"
-    app:cardCornerRadius="@dimen/size4"
+    app:cardCornerRadius="@dimen/size0"
     app:cardElevation="@dimen/size0">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/size4">
+        android:paddingHorizontal="@dimen/size4"
+        android:paddingTop="@dimen/size4"
+        >
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_product_image"
@@ -144,8 +146,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/oneDp"
-            android:layout_marginTop="@dimen/size6"
-            android:layout_marginEnd="@dimen/size2"
+            android:layout_marginTop="@dimen/size8"
             android:background="@color/view_divider_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/card_add"

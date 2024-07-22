@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.chart.ProductBasketFragment">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size0"
-        android:background="@color/view_grey_color"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewHorizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewVertical" />
 
     <com.getir.components.CustomToolBar
         android:id="@+id/customToolBar"
@@ -39,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@id/recyclerViewHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customToolBar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHorizontal"
@@ -48,6 +40,7 @@
         android:layout_marginTop="@dimen/size10"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/size8"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/constrait_bottom"
         app:layout_constraintEnd_toEndOf="parent"

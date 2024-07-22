@@ -110,7 +110,7 @@ class ProductBasketFragment :
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerViewVertical.layoutManager = GridLayoutManager(requireContext(), 1)
+        binding.recyclerViewVertical.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewVertical.adapter = adapter
 
         val itemDecoration = CustomAdaptiveDecoration(

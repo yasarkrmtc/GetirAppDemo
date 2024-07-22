@@ -21,8 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/size8"
+        android:paddingTop="@dimen/size8"
         app:layout_constraintHorizontal_bias="0.0"
+        android:background="@color/white"
+        android:elevation="@dimen/elevation4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customToolBar">
 
@@ -90,6 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:elevation="@dimen/elevation4"
         android:padding="@dimen/size12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +162,7 @@
             android:backgroundTint="@color/app_purple"
             android:paddingVertical="@dimen/size8"
             android:text="@string/sepete_ekle"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:cornerRadius="@dimen/size4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
