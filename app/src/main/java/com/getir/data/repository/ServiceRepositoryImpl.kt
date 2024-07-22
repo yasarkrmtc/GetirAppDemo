@@ -93,7 +93,11 @@ class ServiceRepositoryImpl @Inject constructor(
                     price = item.price,
                     priceText = item.priceText,
                     shortDescription = item.shortDescription,
-                    totalOrder = 1
+                    totalOrder = 1,
+                    squareThumbnailURL = item.squareThumbnailURL,
+                    category = item.category,
+                    status = item.status,
+                    unitPrice = item.unitPrice
                 )
             )
 
@@ -113,7 +117,11 @@ class ServiceRepositoryImpl @Inject constructor(
                         price = item.price,
                         priceText = item.priceText,
                         shortDescription = item.shortDescription,
-                        totalOrder = item.totalOrder
+                        totalOrder = item.totalOrder,
+                        squareThumbnailURL = item.squareThumbnailURL,
+                        category = item.category,
+                        status = item.status,
+                        unitPrice = item.unitPrice
                     )
                 )
             }

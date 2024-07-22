@@ -3,6 +3,7 @@ package com.getir.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.getir.data.api.Product
+import com.getir.data.api.SuggestedProductResponse
 import com.getir.data.repository.ItemEntity
 import com.getir.data.usecase.FetchProductUseCase
 import com.getir.data.usecase.FetchSuggestedProductUseCase
@@ -104,12 +105,33 @@ class ProductListingViewModel @Inject constructor(
                             )
                         }
 
-                        ResponseStatus.SUCCESS -> _viewState.update { viewState ->
-                            viewState.copy(
-                                isLoading = false,
-                                errorMessage = null,
-                                suggestedProductItemList = response.data
-                            )
+                        ResponseStatus.SUCCESS ->
+                        {
+                            val updatedProductList = response.data?.map { productResponse ->
+                                productResponse.apply {
+                                    products = products?.map { product ->
+                                        product.apply {
+                                            totalOrder =
+                                                localItems.find { it.id == product.id }?.totalOrder
+                                                    ?: 0
+                                        }
+                                    }
+                                }
+                            }
+                            _viewState.update { viewState ->
+                                viewState.copy(
+                                    isLoading = false,
+                                    errorMessage = null,
+                                    suggestedProductItemList = updatedProductList
+                                )
+                            }
+                            _viewState.update { viewState ->
+                                viewState.copy(
+                                    isLoading = false,
+                                    errorMessage = null,
+                                    suggestedProductItemList = response.data
+                                )
+                            }
                         }
 
                         else -> {

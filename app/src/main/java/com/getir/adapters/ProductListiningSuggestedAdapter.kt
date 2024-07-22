@@ -8,32 +8,33 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.getir.R
-import com.getir.data.api.SuggestedProduct
+import com.getir.data.api.Product
 import com.getir.databinding.SuggesteProductListingCardItemBinding
 
 class ProductListiningSuggestedAdapter :
-    ListAdapter<SuggestedProduct, ProductListiningSuggestedAdapter.ProductViewHolder>(ProductDiffCallback()) {
+    ListAdapter<Product, ProductListiningSuggestedAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
-    private var buttonClick: (item: SuggestedProduct) -> Unit =
+    private var buttonClick: (item: Product) -> Unit =
         { item -> }
 
-    fun buttonClick(item: (SuggestedProduct) -> Unit) {
+    fun buttonClick(item: (Product) -> Unit) {
         buttonClick = item
     }
 
-    private var itemClick: (item: SuggestedProduct) -> Unit =
+    private var itemClick: (item: Product) -> Unit =
         { item -> }
 
-    fun itemClick(item: (SuggestedProduct) -> Unit) {
+    fun itemClick(item: (Product) -> Unit) {
         itemClick = item
     }
 
     inner class ProductViewHolder(private val binding: SuggesteProductListingCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: SuggestedProduct) {
+        fun bind(product: Product) {
             binding.productName.text = product.name
             binding.productPrice.text = product.priceText
             binding.productAttribute.text = product.shortDescription
+            binding.stoke.text = product.totalOrder.toString()
             if (product.totalOrder == 0) {
                 binding.minus.visibility = View.GONE
                 binding.stoke.visibility = View.GONE
@@ -80,12 +81,12 @@ class ProductListiningSuggestedAdapter :
         holder.bind(getItem(position))
     }
 
-    class ProductDiffCallback : DiffUtil.ItemCallback<SuggestedProduct>() {
-        override fun areItemsTheSame(oldItem: SuggestedProduct, newItem: SuggestedProduct): Boolean {
+    class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: SuggestedProduct, newItem: SuggestedProduct): Boolean {
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
     }
@@ -94,6 +95,9 @@ class ProductListiningSuggestedAdapter :
         if (totalOrder == 0) {
             binding.minus.visibility = View.GONE
             binding.stoke.visibility = View.GONE
+            binding.cardProductImage.strokeColor = binding.root.context.getColor(
+                R.color.view_divider_color
+            )
         } else {
             binding.minus.visibility = View.VISIBLE
             binding.stoke.visibility = View.VISIBLE

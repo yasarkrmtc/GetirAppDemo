@@ -2,6 +2,7 @@ package com.getir.data.repository
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "items")
 data class ItemEntity(
@@ -10,8 +11,12 @@ data class ItemEntity(
     val name: String?,
     val attribute: String?,
     val thumbnailURL: String?,
+    val squareThumbnailURL: String?,
     val imageURL: String?,
     val price: Double?,
     val priceText: String?,
     val shortDescription: String?,
+    val category: String?,
+    val unitPrice: Double?,
+    val status: Int?,
     var totalOrder: Int = 0, )

@@ -28,8 +28,12 @@ class ChartAdapter :
             binding.productPrice.text = product.priceText
             binding.productAttribute.text = product.attribute
             binding.stoke.text = product.totalOrder.toString()
-            Glide.with(binding.productImage.context).load(product.thumbnailURL)
-                .into(binding.productImage)
+            product.imageURL?.let {
+                Glide.with(binding.productImage.context).load(product.imageURL).into(binding.productImage)
+            }
+            product.squareThumbnailURL?.let {
+                Glide.with(binding.productImage.context).load(product.squareThumbnailURL).into(binding.productImage)
+            }
 
             binding.addButton.clickWithDebounce {
                 product.totalOrder += 1

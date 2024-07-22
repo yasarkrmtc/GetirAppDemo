@@ -27,6 +27,11 @@ class ProductDetailFragment :
 
     val args: ProductDetailFragmentArgs by navArgs()
     lateinit var product: Product
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProduct(product.id)
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,22 +46,6 @@ class ProductDetailFragment :
 
             }
 
-            product.let {
-                Glide.with(requireContext()).load(product.thumbnailURL).into(productImage)
-                productName.text = it.name
-                productPrice.text = it.priceText
-                productAttribute.text = it.attribute
-                when (it.totalOrder) {
-                    0 -> chartAdd.visibility = View.VISIBLE
-                    1 -> binding.minus.setImageResource(
-                        R.drawable.purple_trash_icon
-                    )
-                    else -> {
-                        cardAdd.visibility = View.VISIBLE
-                        stoke.text = it.totalOrder.toString()
-                    }
-                }
-            }
         }
         binding.chartAdd.clickWithDebounce {
             product.totalOrder += 1
@@ -84,15 +73,83 @@ class ProductDetailFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.item.collect { item ->
-                    item?.let {
-                        binding.stoke.text = it.totalOrder.toString()
-                        if (it.totalOrder == 0) findNavController().popBackStack() else {
-                            binding.cardAdd.visibility = View.VISIBLE
+                    if (item != null) {
+                        item?.let {
+                            product = Product(
+                                it.id,
+                                it.name,
+                                it.attribute,
+                                it.squareThumbnailURL,
+                                it.thumbnailURL,
+                                it.imageURL,
+                                it.price,
+                                it.priceText,
+                                it.category,
+                                it.unitPrice,
+                                it.status,
+                                it.shortDescription,
+                                it.totalOrder
+                            )
                             binding.stoke.text = it.totalOrder.toString()
+                            if (it.totalOrder == 0) findNavController().popBackStack() else {
+                                binding.cardAdd.visibility = View.VISIBLE
+                                binding.stoke.text = it.totalOrder.toString()
+                            }
+                            binding.minus.setImageResource(
+                                if (it.totalOrder == 1) R.drawable.purple_trash_icon else R.drawable.minus_icon
+                            )
+
+                            product.imageURL?.let {
+                                Glide.with(binding.productImage.context).load(product.imageURL)
+                                    .into(binding.productImage)
+                            }
+                            product.squareThumbnailURL?.let {
+                                Glide.with(binding.productImage.context)
+                                    .load(product.squareThumbnailURL).into(binding.productImage)
+                            }
+                            binding.apply {
+                                productName.text = it.name
+                                productPrice.text = it.priceText
+                                productAttribute.text = it.attribute
+                                when (it.totalOrder) {
+                                    0 -> chartAdd.visibility = View.VISIBLE
+                                    1 -> {
+                                        chartAdd.visibility = View.GONE
+                                        cardAdd.visibility = View.VISIBLE
+                                        stoke.text = it.totalOrder.toString()
+                                        binding.minus.setImageResource(
+                                            R.drawable.purple_trash_icon
+                                        )
+                                    }
+
+                                    else -> {
+                                        chartAdd.visibility = View.GONE
+                                        cardAdd.visibility = View.VISIBLE
+                                        stoke.text = it.totalOrder.toString()
+                                    }
+                                }
+                            }
+
                         }
-                        binding.minus.setImageResource(
-                            if (it.totalOrder == 1) R.drawable.purple_trash_icon else R.drawable.minus_icon
-                        )
+                    } else if (item == null) {
+                        product.let {
+                            binding.apply {
+                                productName.text = it.name
+                                productPrice.text = it.priceText
+                                productAttribute.text = it.attribute
+                                product.imageURL?.let {
+                                    Glide.with(binding.productImage.context).load(product.imageURL)
+                                        .into(binding.productImage)
+                                }
+                                product.squareThumbnailURL?.let {
+                                    Glide.with(binding.productImage.context)
+                                        .load(product.squareThumbnailURL).into(binding.productImage)
+                                }
+                                it.totalOrder = 0
+                                chartAdd.visibility = View.VISIBLE
+                                cardAdd.visibility = View.GONE
+                            }
+                        }
                     }
                 }
             }

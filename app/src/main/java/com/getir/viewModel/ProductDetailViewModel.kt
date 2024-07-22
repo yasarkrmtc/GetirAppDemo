@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
-    private val getLocalItemsUseCase: GetLocalItemsUseCase,
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
     private val insertDataBaseUseCase: InsertDataBaseUseCase,
     private val getPrdouctUseCase: GetPrdouctUseCase

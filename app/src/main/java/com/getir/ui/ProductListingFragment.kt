@@ -14,6 +14,7 @@ import com.getir.BaseFragment
 import com.getir.R
 import com.getir.adapters.ProductListingAdapter
 import com.getir.adapters.ProductListiningSuggestedAdapter
+import com.getir.data.api.Product
 import com.getir.databinding.FragmentProductListingBinding
 import com.getir.utils.CustomAdaptiveDecoration
 import com.getir.viewModel.ProductListingViewModel
@@ -44,11 +45,22 @@ class ProductListingFragment :
     }
 
     private fun initListener() {
+        horizontalAdapter.buttonClick {suggestedProduct ->
+            viewModel.updateDataBase(suggestedProduct)
+        }
         verticalAdapter.buttonClick { product ->
             viewModel.updateDataBase(product)
         }
 
         verticalAdapter.itemClick { product ->
+            val action =
+                ProductListingFragmentDirections.actionProductListingFragmentToProductDetailFragment(
+                    product
+                )
+            findNavController().navigate(action)
+        }
+
+        horizontalAdapter.itemClick { product ->
             val action =
                 ProductListingFragmentDirections.actionProductListingFragmentToProductDetailFragment(
                     product

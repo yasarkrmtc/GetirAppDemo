@@ -59,7 +59,11 @@ class ProductBasketFragment :
                     price = it.price,
                     priceText = it.priceText,
                     shortDescription = it.shortDescription,
-                    totalOrder = it.totalOrder
+                    totalOrder = it.totalOrder,
+                    squareThumbnailURL = it.squareThumbnailURL,
+                    category = it.category,
+                    status = it.status,
+                    unitPrice = it.unitPrice
                 )
             )
         }
