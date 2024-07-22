@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productListingFragment">
+
+    <fragment
+        android:id="@+id/productListingFragment"
+        android:name="com.getir.ui.home.ProductListingFragment"
+        android:label="fragment_product_listing"
+        tools:layout="@layout/fragment_product_listing" >
+        <action
+            android:id="@+id/action_productListingFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productListingFragment_to_productBasketFragment"
+            app:destination="@id/productBasketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.getir.ui.detail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_productBasketFragment"
+            app:destination="@id/productBasketFragment" />
+        <argument
+            android:name="product"
+            app:argType="com.getir.data.remote.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/productBasketFragment"
+        android:name="com.getir.ui.chart.ProductBasketFragment"
+        android:label="fragment_product_basket"
+        tools:layout="@layout/fragment_product_basket" >
+        <action
+            android:id="@+id/action_productBasketFragment_to_productListingFragment"
+            app:destination="@id/productListingFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.chart.ProductBasketFragment">
+
+
+    <com.getir.components.CustomToolBar
+        android:id="@+id/customToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:action_second_icon_visibility="true"
+        app:action_first_icon_visibility="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolBarBackgroundColor="@color/app_purple"
+        app:toolBarText="@string/title_sepetim"
+        app:toolBarTextColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewVertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/size10"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customToolBar" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/nerilen_r_nler"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/size4"
+        android:layout_marginBottom="@dimen/size2"
+        android:textSize="@dimen/body4Size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewHorizontal"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0"
+        android:layout_marginTop="@dimen/size10"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/size4"
+        android:layout_marginBottom="@dimen/size8"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/constrait_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrait_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/size8"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/orderDoneButtonCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size8"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@color/app_purple"
+                    android:gravity="center"
+                    android:padding="@dimen/size10"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/sipari_tamamla_button_text"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/body3Size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/_1_500_00"
+                    android:textColor="@color/app_purple"
+                    android:textSize="@dimen/header2Size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
