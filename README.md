@@ -8,6 +8,8 @@ Minimum API Düzeyi: Android 8 (API düzeyi 26)
 Maksimum API Düzeyi: Android 14 (API düzeyi 34)
  
 
+
+![lottie](https://github.com/user-attachments/assets/88c0538a-f3df-47a1-82ea-87e6443727a7)
 ![GetirHomePage](https://github.com/user-attachments/assets/d28b0efb-5d60-48ca-a61e-394124192612)
 ![GetirDetailPage](https://github.com/user-attachments/assets/b514f4a4-deac-4d83-b2fa-e35d583d0146)
 ![BosDetail](https://github.com/user-attachments/assets/f418c6a2-f164-4834-8265-b783124d2e1f)
