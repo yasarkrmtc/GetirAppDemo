@@ -33,5 +33,9 @@
         android:id="@+id/productBasketFragment"
         android:name="com.getir.ui.ProductBasketFragment"
         android:label="fragment_product_basket"
-        tools:layout="@layout/fragment_product_basket" />
+        tools:layout="@layout/fragment_product_basket" >
+        <action
+            android:id="@+id/action_productBasketFragment_to_productListingFragment"
+            app:destination="@id/productListingFragment" />
+    </fragment>
 </navigation>

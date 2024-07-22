@@ -13,4 +13,5 @@ interface ServiceRepository {
     suspend fun insertDataBaseItem(item: Product)
     suspend fun getLocalItems():Flow<List<ItemEntity>>
     suspend fun getLocalItem(id:String): ItemEntity ?
+    suspend fun deleteAllItems()
 }

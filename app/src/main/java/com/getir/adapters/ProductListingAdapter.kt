@@ -1,6 +1,5 @@
 package com.getir.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,15 +14,13 @@ import com.getir.databinding.ProductListingCardItemBinding
 class ProductListingAdapter :
     ListAdapter<Product, ProductListingAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
-    private var buttonClick: (item: Product) -> Unit =
-        { item -> }
+    private var buttonClick: (item: Product) -> Unit = { item -> }
 
     fun buttonClick(item: (Product) -> Unit) {
         buttonClick = item
     }
 
-    private var itemClick: (item: Product) -> Unit =
-        { item -> }
+    private var itemClick: (item: Product) -> Unit = { item -> }
 
     fun itemClick(item: (Product) -> Unit) {
         itemClick = item
@@ -32,7 +29,6 @@ class ProductListingAdapter :
     inner class ProductViewHolder(private val binding: ProductListingCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
-            Log.e("qqqqqqq",product.name.toString())
             binding.productName.text = product.name
             binding.productPrice.text = product.priceText
             binding.productAttribute.text = product.attribute
@@ -44,18 +40,19 @@ class ProductListingAdapter :
             Glide.with(binding.productImage.context).load(product.thumbnailURL)
                 .into(binding.productImage)
 
+            updateButtonsVisibility(binding, product.totalOrder)
 
             binding.addButton.setOnClickListener {
                 product.totalOrder += 1
                 binding.stoke.text = product.totalOrder.toString()
                 buttonClick.invoke(product)
-                updateButtonsVisibility(binding,product.totalOrder)
+                updateButtonsVisibility(binding, product.totalOrder)
             }
             binding.minus.setOnClickListener {
                 product.totalOrder -= 1
                 binding.stoke.text = product.totalOrder.toString()
                 buttonClick.invoke(product)
-                updateButtonsVisibility(binding,product.totalOrder)
+                updateButtonsVisibility(binding, product.totalOrder)
             }
 
             binding.productImage.setOnClickListener {
@@ -87,15 +84,19 @@ class ProductListingAdapter :
         }
     }
 
-    private fun updateButtonsVisibility(binding: ProductListingCardItemBinding,totalOrder: Int) {
+    private fun updateButtonsVisibility(binding: ProductListingCardItemBinding, totalOrder: Int) {
         if (totalOrder == 0) {
             binding.minus.visibility = View.GONE
             binding.stoke.visibility = View.GONE
+            binding.cardProductImage.strokeColor = binding.root.context.getColor(R.color.view_divider_color)
         } else {
             binding.minus.visibility = View.VISIBLE
             binding.stoke.visibility = View.VISIBLE
             binding.minus.setImageResource(
                 if (totalOrder == 1) R.drawable.purple_trash_icon else R.drawable.minus_icon
+            )
+            binding.cardProductImage.strokeColor = binding.root.context.getColor(
+                if (totalOrder >= 1) R.color.app_purple else R.color.view_divider_color
             )
         }
     }

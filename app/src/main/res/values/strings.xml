@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">getir</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_urunler">Ürünler</string>
     <string name="title_sepetim">Sepetim</string>
@@ -12,4 +11,10 @@
     <string name="sipari_tamamla_button_text">Sipariş Tamamla</string>
     <string name="_1_500_00">₺1.500,00</string>
     <string name="sepete_ekle">Sepete Ekle</string>
+    <string name="confirm_clear_cart">Sepetini boşaltmak istediğinden emin misin?</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="order_complete_message">Siparişiniz Tamamlandı!</string>
+    <string name="no_items_to_delete">Silinecek ürün yok.</string>
+    <string name="add_items_first">İlk önce ürün eklemelisiniz !</string>
 </resources>

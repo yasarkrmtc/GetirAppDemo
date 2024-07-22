@@ -1,7 +1,6 @@
 package com.getir.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -65,19 +64,15 @@ class ProductListingFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.viewState.collect { viewState ->
                     if (viewState.errorMessage != null) {
-                        // Handle error
                     } else {
                         viewState.isLoading?.let {
                             binding.homeProgressBar.isVisible = it
                         }
                         viewState.productItemList?.let { demoResponses ->
-                            Log.e("qqqq", viewState.productItemList.toString())
                             val products = demoResponses.flatMap { it.products ?: emptyList() }
                             verticalAdapter.submitList(products)
                         }
                         viewState.suggestedProductItemList?.let { demoResponses ->
-                            Log.e("qqqq", viewState.suggestedProductItemList.toString())
-
                             val suggestedProducts =
                                 demoResponses.flatMap { it.products ?: emptyList() }
                             horizontalAdapter.submitList(suggestedProducts)
@@ -111,9 +106,8 @@ class ProductListingFragment :
         binding.recyclerViewHorizontal.adapter = horizontalAdapter
 
         val itemDecoration = CustomAdaptiveDecoration(
-            context = requireContext(), spanCount = 1, spacingHorizontal = 16, spacingVertical = 0
+            context = requireContext(), spanCount = 1, spacingHorizontal = 8, spacingVertical = 8
         )
         binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
     }
 }
-

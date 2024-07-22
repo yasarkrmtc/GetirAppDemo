@@ -45,6 +45,9 @@ class ProductListiningSuggestedAdapter :
                 Glide.with(binding.productImage.context).load(product.squareThumbnailURL).into(binding.productImage)
             }
 
+            updateButtonsVisibility(binding, product.totalOrder)
+
+
             binding.addButton.setOnClickListener {
                 product.totalOrder += 1
                 binding.stoke.text = product.totalOrder.toString()
@@ -97,6 +100,10 @@ class ProductListiningSuggestedAdapter :
             binding.minus.setImageResource(
                 if (totalOrder == 1) R.drawable.purple_trash_icon else R.drawable.minus_icon
             )
+            binding.cardProductImage.strokeColor = binding.root.context.getColor(
+                if (totalOrder >= 1) R.color.app_purple else R.color.view_divider_color
+            )
         }
+
     }
 }

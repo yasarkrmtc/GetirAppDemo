@@ -2,6 +2,7 @@ package com.getir.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -10,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.getir.BaseFragment
+import com.getir.R
 import com.getir.adapters.ChartAdapter
 import com.getir.data.api.Product
 import com.getir.databinding.FragmentProductBasketBinding
@@ -32,10 +34,10 @@ class ProductBasketFragment :
                 findNavController().popBackStack()
             }
             customToolBar.whiteTrashBtnSetOnClickListener {
-                showClearCartConfirmationDialog()
+                checkAndShowClearCartConfirmationDialog()
             }
             orderDoneButtonCard.setOnClickListener {
-
+                checkAndShowOrderCompleteDialog()
             }
         }
         setupRecyclerView()
@@ -92,22 +94,58 @@ class ProductBasketFragment :
         binding.recyclerViewVertical.addItemDecoration(itemDecoration)
     }
 
+    private fun checkAndShowClearCartConfirmationDialog() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val items = viewModel.items.value
+            if (items.isEmpty()) {
+                showToast(getString(R.string.no_items_to_delete))
+            } else {
+                showClearCartConfirmationDialog()
+            }
+        }
+    }
+
+    private fun checkAndShowOrderCompleteDialog() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val items = viewModel.items.value
+            if (items.isEmpty()) {
+                showToast(getString(R.string.add_items_first))
+            } else {
+                showOrderCompleteDialog()
+            }
+        }
+    }
+
     private fun showClearCartConfirmationDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setMessage("Sepetini boşaltmak istediğinden emin misin?")
+        builder.setMessage(getString(R.string.confirm_clear_cart))
             .setCancelable(false)
-            .setPositiveButton("Evet") { dialog, id ->
+            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
                 lifecycleScope.launch {
                     viewModel.clearDatabase()
-
                 }
             }
-            .setNegativeButton("Hayır") { dialog, id ->
+            .setNegativeButton(getString(R.string.no)) { dialog, id ->
                 dialog.dismiss()
             }
         val alert = builder.create()
         alert.show()
     }
 
+    private fun showOrderCompleteDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_order_complete, null)
+        val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView)
+        val dialog = dialogBuilder.create()
+        dialog.show()
 
+        dialogView.postDelayed({
+            dialog.dismiss()
+            viewModel.clearDatabase()
+            findNavController().navigate(R.id.action_productBasketFragment_to_productListingFragment)
+        }, 3000)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 }

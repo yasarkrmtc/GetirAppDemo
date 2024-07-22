@@ -77,7 +77,7 @@ class ServiceRepositoryImpl @Inject constructor(
     override suspend fun getLocalItem(id: String): ItemEntity? {
         return cartDAO.getItemById(id)
     }
-     suspend fun deleteAllItems() {
+    override suspend fun deleteAllItems() {
         return cartDAO.deleteAll()
     }
 

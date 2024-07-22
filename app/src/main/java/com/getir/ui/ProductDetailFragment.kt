@@ -16,7 +16,6 @@ import com.getir.data.api.Product
 import com.getir.databinding.FragmentProductDetailBinding
 import com.getir.utils.clickWithDebounce
 import com.getir.viewModel.ProductDetailViewModel
-import com.getir.viewModel.ProductListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -64,6 +63,7 @@ class ProductDetailFragment :
             binding.chartAdd.visibility = View.GONE
             binding.cardAdd.visibility = View.VISIBLE
             viewModel.updateDataBase(product)
+
         }
 
         binding.addButton.clickWithDebounce {
