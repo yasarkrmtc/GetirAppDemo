@@ -10,9 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.getir.BaseFragment
 import com.getir.R
+import com.getir.adapters.BasketSuggestedAdaper
 import com.getir.adapters.ChartAdapter
+import com.getir.adapters.ProductListiningSuggestedAdapter
 import com.getir.data.api.Product
 import com.getir.databinding.FragmentProductBasketBinding
 import com.getir.utils.CustomAdaptiveDecoration
@@ -26,9 +29,11 @@ class ProductBasketFragment :
     private val viewModel: ProductBasketViewModel by viewModels()
 
     private val adapter = ChartAdapter()
+    private val horizontalAdapter = BasketSuggestedAdaper()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupHorizontalRecyclerView()
         binding.apply {
             customToolBar.navigationIconCloseSetOnClickListener {
                 findNavController().popBackStack()
@@ -48,6 +53,9 @@ class ProductBasketFragment :
     }
 
     private fun initListener() {
+        horizontalAdapter.buttonClick {
+            viewModel.updateDataBase(it)
+        }
         adapter.onItemClick {
             viewModel.updateDataBase(
                 Product(
@@ -74,6 +82,7 @@ class ProductBasketFragment :
             viewModel.items.collect { items ->
                 if (items.isNotEmpty()) {
                     adapter.submitList(items)
+                    viewModel.getProduct()
                 } else {
                     adapter.submitList(listOf())
                 }
@@ -86,6 +95,22 @@ class ProductBasketFragment :
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.suggestedItemList.collect { products ->
+                    if (!products.isNullOrEmpty()){
+                        val suggestedProducts =
+                            products.flatMap { it.products ?: emptyList() }
+                        horizontalAdapter.submitList(suggestedProducts)
+                    }else{
+                        horizontalAdapter.submitList(listOf())
+
+                    }
+
+                }
+            }
+        }
+
     }
 
     private fun setupRecyclerView() {
@@ -151,5 +176,16 @@ class ProductBasketFragment :
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupHorizontalRecyclerView() {
+        binding.recyclerViewHorizontal.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewHorizontal.adapter = horizontalAdapter
+
+        val itemDecoration = CustomAdaptiveDecoration(
+            context = requireContext(), spanCount = 1, spacingHorizontal = 8, spacingVertical = 8
+        )
+        binding.recyclerViewHorizontal.addItemDecoration(itemDecoration)
     }
 }
