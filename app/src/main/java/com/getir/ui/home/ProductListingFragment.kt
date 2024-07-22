@@ -2,6 +2,7 @@ package com.getir.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -32,7 +33,11 @@ class ProductListingFragment :
         setupHorizontalRecyclerView()
         binding.apply {
             customToolBar.chartIconSetOnClickListener {
-                findNavController().navigate(R.id.action_productListingFragment_to_productBasketFragment)
+                if (viewModel.localPrice.value != "₺0.00"){
+                    findNavController().navigate(R.id.action_productListingFragment_to_productBasketFragment)
+                }else{
+                    Toast.makeText(context, getString(R.string.message_add_product_first), Toast.LENGTH_SHORT).show()
+                }
             }
             viewModel.getProduct()
             viewModel.getSuggestedProduct()

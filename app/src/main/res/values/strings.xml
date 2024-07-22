@@ -18,4 +18,6 @@
     <string name="no_items_to_delete">Silinecek ürün yok.</string>
     <string name="add_items_first">İlk önce ürün eklemelisiniz !</string>
     <string name="nerilen_r_nler">Önerilen Ürünler</string>
+    <string name="message_add_product_first">İlk önce ürün eklemelisiniz!</string>
+
 </resources>
