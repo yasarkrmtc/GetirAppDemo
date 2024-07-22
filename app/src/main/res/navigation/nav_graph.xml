@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/productListingFragment"
-        android:name="com.getir.ui.ProductListingFragment"
+        android:name="com.getir.ui.home.ProductListingFragment"
         android:label="fragment_product_listing"
         tools:layout="@layout/fragment_product_listing" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.getir.ui.ProductDetailFragment"
+        android:name="com.getir.ui.detail.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" >
         <action
@@ -27,11 +27,11 @@
             app:destination="@id/productBasketFragment" />
         <argument
             android:name="product"
-            app:argType="com.getir.data.api.Product" />
+            app:argType="com.getir.data.remote.Product" />
     </fragment>
     <fragment
         android:id="@+id/productBasketFragment"
-        android:name="com.getir.ui.ProductBasketFragment"
+        android:name="com.getir.ui.chart.ProductBasketFragment"
         android:label="fragment_product_basket"
         tools:layout="@layout/fragment_product_basket" >
         <action

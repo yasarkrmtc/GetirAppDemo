@@ -1,10 +1,13 @@
 package com.getir.data.repository
 
-import com.getir.data.api.Product
-import com.getir.data.api.ProductResponse
-import com.getir.data.api.ServiceInterface
-import com.getir.data.api.SuggestedProductResponse
-import com.getir.model.Response
+import com.getir.data.remote.Product
+import com.getir.data.remote.ProductResponse
+import com.getir.data.remote.ServiceInterface
+import com.getir.data.remote.SuggestedProductResponse
+import com.getir.core.Response
+import com.getir.data.local.CartDAO
+import com.getir.data.local.ItemEntity
+import com.getir.domain.repository.ServiceRepository
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
