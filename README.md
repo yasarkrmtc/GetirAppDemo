@@ -7,6 +7,10 @@ Desteklenen Android Versiyonları
 Minimum API Düzeyi: Android 8 (API düzeyi 26)
 Maksimum API Düzeyi: Android 14 (API düzeyi 34)
  
+APK LİNKİ!!!
+
+https://drive.google.com/file/d/1NrliC3JB79Iq5g9GCr9IDjdBdJ5TFZtP/view?usp=sharing
+
 
 
 ![lottie](https://github.com/user-attachments/assets/88c0538a-f3df-47a1-82ea-87e6443727a7)
